@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Dr. Ment Homepage </title>
+    </head>
+    <body>
+        <p> Welcome back {{session.username}}!</p>
+        <p> {{session.organization}}</p>
+        <form action = "/fileupload" method = "post" enctype="multipart/form-data">   
+            <input type="file" name="file" />   
+            <input type = "submit" value="Upload">   
+        </form>   
+        <a href="{{ url_for('log_out') }}">Log Out</a>
+    </body>
+</html>

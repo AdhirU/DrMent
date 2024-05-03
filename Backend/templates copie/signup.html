@@ -1,0 +1,15 @@
+{% from 'bootstrap5/form.html' import render_form %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Log-in </title>
+    </head>
+    <body>
+        <p> Sign up for an organization </p>
+        <p>{{msg}}</p>
+        {{ render_form(form) }}
+        <a href="{{ url_for('create_new_org') }}">Create new Organization</a>
+        <a href="{{ url_for('log_in') }}">Log in</a>
+
+    </body>
+</html>
