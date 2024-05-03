@@ -1,0 +1,14 @@
+{% from 'bootstrap5/form.html' import render_form %}
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> Delete User </title>
+    </head>
+    <body>
+        {{msg}}
+        {{ render_form(form) }}
+
+        <a href="{{ url_for('log_out') }}">Log Out</a>
+        <a href="{{ url_for('admin_homepage') }}">Back</a>
+    </body>
+</html>
