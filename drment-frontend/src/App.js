@@ -23,6 +23,10 @@ import Dashboard from './Dashboard';
 // Configures the Amplify library with the settings from aws-exports.js, which includes all the AWS service configurations for this project.
 Amplify.configure(awsExports);
 
+function upload() {
+  alert("Document Uploaded!")
+}
+
 function App() {
   return (
     <div className="App">
@@ -30,18 +34,12 @@ function App() {
         {({ signOut }) => (
           <main>
             <header className='App-header'>
-              {/* Quiz Component */}
-              {/* <Quiz /> */}
+              {/* Dashboard Component */}
               <Dashboard />
               {/* Sign Out Button */}
               <button 
                 onClick={signOut} 
-                style={{ 
-                  margin: '20px', 
-                  fontSize: '0.8rem', 
-                  padding: '5px 10px', 
-                  marginTop: '20px'
-                }}
+                className='button-style'
               >
                 Sign Out
               </button>

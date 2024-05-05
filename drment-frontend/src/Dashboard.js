@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Document from './Document';
+import UploadDocument from './UploadDocument';
 
 
 class Dashboard extends Component {
@@ -27,19 +28,6 @@ class Dashboard extends Component {
   }
 
   render() {
-    // const persons = this.state.person.map((item, i) => (
-    //   <div>
-    //     <h1>{ item.name.first }</h1>
-    //     <span>{ item.cell }, { item.email }</span>
-    //   </div>
-    // ));
-
-    // return (
-    //   <div id="layout-content" className="layout-content-wrapper">
-    //     <div className="panel-list">{ persons }</div>
-    //   </div>
-    // );
-
     const documents = this.state.documents.map((item, i) => (
       <Document key={i} name={item.name} timestamp={item.timestamp} url={item.url}/>
     ))
@@ -47,6 +35,7 @@ class Dashboard extends Component {
     return (
       <div>
         { documents }
+        <UploadDocument />
       </div>
     )
   }
