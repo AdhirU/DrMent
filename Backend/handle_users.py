@@ -3,7 +3,7 @@ import hashlib
 from create_database import *
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
-dynamodb = boto3.client('dynamodb')
+
 
 db = boto3.resource('dynamodb', aws_access_key_id="xxx",
                         aws_secret_access_key="xxx",

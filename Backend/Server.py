@@ -7,11 +7,9 @@ from flask import session
 from create_database import *
 from flask_bootstrap import Bootstrap5
 import hashlib
-#from werkzeug import secure_filename
 app = Flask(__name__) 
 
 bootstrap = Bootstrap5(app)
-
 
 @app.route("/")
 def index():
@@ -169,6 +167,7 @@ def admin_homepage():
 def file_uploaded():   
     if request.method == 'POST':   
         f = request.files['file'] 
+
         f.save(f.filename)   
         return render_template("give_macros.html", name = f.filename)   
   
