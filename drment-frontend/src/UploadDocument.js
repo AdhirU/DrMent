@@ -5,28 +5,44 @@ class UploadDocument extends Component {
     super(props);
     this.state = {
       name: "",
-      url: "",
-      org: "org_1"
+      org: "org_1",
+      file: null
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFileChange = this.handleFileChange.bind(this);
   }
 
   handleChange(evt) {
     this.setState({[evt.target.name]: evt.target.value})
   }
 
+  handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        this.setState({file: reader.result})
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  };
+
   handleSubmit(evt) {
     evt.preventDefault();
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
+    let body = {
+      "name": this.state.name,
+      "org": this.state.org,
+      "file": this.state.file
+    }
     var requestOptions = {
       method: 'POST',
-      headers: myHeaders,
-      redirect: 'follow'
+      headers: { "Content-Type": "application/json", "Authorization": this.props.token },
+      body: JSON.stringify(body)
     };
 
-    fetch("https://sqikvxgwz3.execute-api.us-east-1.amazonaws.com/dev/document", requestOptions)
+    fetch("https://sqikvxgwz3.execute-api.us-east-1.amazonaws.com/dev/document", 
+      requestOptions)
       .then(response =>response.text())
       .then(result => this.setState({documents: JSON.parse(result)}))
       .catch(error => console.log('error', error));
@@ -42,15 +58,7 @@ class UploadDocument extends Component {
           value={this.state.name}
           onChange={this.handleChange}
         />
-        <label htmlFor='url'>URL: </label>
-        <input
-          id="url"
-          name="url"
-          value={this.state.url}
-          onChange={this.handleChange}
-        />
-        {/* <input type="file" id="myFile" name="filename"
-          className='button-style' accept='.pdf' /> */}
+        <input type="file" onChange={this.handleFileChange} accept='.pdf' />
         <button>Upload File</button>
       </form>
     )

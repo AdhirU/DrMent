@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { fetchAuthSession } from '@aws-amplify/auth';
 import Document from './Document';
 import UploadDocument from './UploadDocument';
 
@@ -6,19 +7,24 @@ import UploadDocument from './UploadDocument';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {documents: []}
+    this.state = {documents: [], user_id: "", token: "" }
   }
 
-  componentDidMount() {
-    this.DocumentList();
+  async componentDidMount() {
+    const session = await fetchAuthSession();
+    this.setState({
+      user_id: session.tokens.signInDetails.loginId,
+      token: session.tokens.idToken.toString()
+    }, this.DocumentList)
   }
 
   DocumentList() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
     var requestOptions = {
       method: 'GET',
-      headers: myHeaders,
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.state.token
+      },
       redirect: 'follow'
     };
     fetch("https://sqikvxgwz3.execute-api.us-east-1.amazonaws.com/dev/dashboard/org_1", requestOptions)
@@ -35,7 +41,7 @@ class Dashboard extends Component {
     return (
       <div>
         { documents }
-        <UploadDocument />
+        <UploadDocument token={this.state.token}/>
       </div>
     )
   }

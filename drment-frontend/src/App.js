@@ -8,7 +8,7 @@ import {Amplify} from 'aws-amplify';
 // Authenticator is a React component that provides a ready-to-use sign-in and sign-up UI.
 // withAuthenticator is a higher-order component that wraps your app component to enforce authentication.
 import { Authenticator, withAuthenticator } from '@aws-amplify/ui-react';
-
+import { fetchAuthSession } from '@aws-amplify/auth';
 // Imports the default styles for the Amplify UI components. This line ensures that the authenticator looks nice out of the box.
 import '@aws-amplify/ui-react/styles.css';
 
@@ -23,10 +23,7 @@ import Dashboard from './Dashboard';
 // Configures the Amplify library with the settings from aws-exports.js, which includes all the AWS service configurations for this project.
 Amplify.configure(awsExports);
 
-function upload() {
-  alert("Document Uploaded!")
-}
-
+// Function to print access token and id token
 function App() {
   return (
     <div className="App">
