@@ -58,7 +58,7 @@ class UploadDocument extends Component {
           value={this.state.name}
           onChange={this.handleChange}
         />
-        <input type="file" onChange={this.handleFileChange} accept='.pdf' />
+        <input type="file" onChange={this.handleFileChange} />
         <button>Upload File</button>
       </form>
     )

@@ -13,8 +13,8 @@ table = dynamodb.Table("DrMentTable")
 
 def lambda_handler(event, context):
     print("event", event)
-    body = event["body"]
-    # body = json.loads(event['body'])
+    # body = event["body"]
+    body = json.loads(event['body'])
     file_content = body["file"]
     decoded_content = base64.b64decode(file_content.split(",")[1])
 
