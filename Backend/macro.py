@@ -38,6 +38,8 @@ def ScanMacro(filename):
     #checks if is a macro file
     if "is not a valid OLE file." in output[0]:
         print("Not a office document!")
+        response = {"code":0, "message": "Not a office document!"}
+        return response
     else:
         macros = []
 
@@ -50,7 +52,8 @@ def ScanMacro(filename):
         #exits if no macros found
         if len(macros) == 0:
             print("No Macros Detected!")
-            sys.exit()
+            response = {"code":1, "message": "No Macros Detected!"}
+            return response
 
         macro_json["num_macros"] = str(len(macros))
 
@@ -149,8 +152,8 @@ def ScanMacro(filename):
                 for url in urls:
                     print(url)
                 print()
-
-            return json.dumps(macro_json)
+            response = {"code": 2, "message": "Macros Detected", "output":macro_json}
+            return response
 
 if __name__ == '__main__':
     filename = sys.argv[1]
