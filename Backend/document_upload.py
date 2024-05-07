@@ -1,4 +1,5 @@
 """Only allows document upload without any dynamodb functionality"""
+import base64
 import macro
 from flask_forms import *
 from flask import Flask, render_template, request, redirect, url_for
@@ -32,6 +33,10 @@ def log_out():
 def file_uploaded():   
     if request.method == 'POST':   
         f = request.files['file'] 
+        print("f", f)
+        print(type(f))
+        print(base64.b64encode(f))
+        return
         f.save(f.filename)  
         macro_json = macro.ScanMacro(f.filename) 
         print(macro_json)

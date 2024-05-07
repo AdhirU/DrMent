@@ -29,11 +29,12 @@ class Capturing(list):
 def ScanMacro(filename):
     #macro json object returned to backend
     macro_json = {}
+    print("FILENAME:", filename)
 
     #initial parsing of file and checks for streams
     with Capturing() as output:
         oledump.OLEDump(filename, options)
-    #print(output)
+    print("OUTPUT:", output)
     
     #checks if is a macro file
     if "is not a valid OLE file." in output[0]:
@@ -47,6 +48,7 @@ def ScanMacro(filename):
         for stream_num in range(len(output)):
             split = output[stream_num].split(" ")
             if len(split) > 3 and split[2] == "M":
+                print("STREAM_NUM:", stream_num)
                 macros.append(stream_num)
 
         #exits if no macros found

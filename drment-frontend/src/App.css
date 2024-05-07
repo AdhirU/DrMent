@@ -46,6 +46,21 @@ body {
   border-radius: 3px;
 }
 
+.upload-message {
+  font-size: x-small;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+}
+
+.success {
+  color: green;
+}
+
+.error {
+  color: red;
+}
+
 .document-list {
   list-style: none;
   padding: 0;
