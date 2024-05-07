@@ -9,6 +9,7 @@ import {Amplify} from 'aws-amplify';
 // withAuthenticator is a higher-order component that wraps your app component to enforce authentication.
 import { Authenticator, withAuthenticator } from '@aws-amplify/ui-react';
 import { fetchAuthSession } from '@aws-amplify/auth';
+
 // Imports the default styles for the Amplify UI components. This line ensures that the authenticator looks nice out of the box.
 import '@aws-amplify/ui-react/styles.css';
 
@@ -27,23 +28,38 @@ Amplify.configure(awsExports);
 function App() {
   return (
     <div className="App">
-      <Authenticator>
-        {({ signOut }) => (
-          <main>
-            <header className='App-header'>
-              {/* Dashboard Component */}
-              <Dashboard />
-              {/* Sign Out Button */}
-              <button 
-                onClick={signOut} 
-                className='button-style'
-              >
-                Sign Out
-              </button>
-            </header>
-          </main>
-        )}
-      </Authenticator>
+      <header className='header'>
+        <h1>Document Management</h1>
+      </header>
+      <div className="container">
+        <section className="document-upload-section">
+          <h2>Upload Document</h2>
+          <form>
+            <label htmlFor="file">Choose File:</label>
+            <input type="file" id="file" />
+            <label htmlFor="name">Document Name:</label>
+            <input type="text" id="name" />
+            <label htmlFor="description">Document Description:</label>
+            <input type="text" id="description" />
+            <button type="submit">Upload</button>
+          </form>
+        </section>
+        <section className="document-list">
+          <h2>Scanned Documents</h2>
+          <div className="document-list-item">
+            <h3>Document 1</h3>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button>View Scanned Document</button>
+            <button>Comment on Document</button>
+          </div>
+          <div className="document-list-item">
+            <h3>Document 2</h3>
+            <p>Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <button>View Scanned Document</button>
+            <button>Comment on Document</button>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
