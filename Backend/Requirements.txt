@@ -13,3 +13,5 @@ tzdata==2023.3
 urllib3==2.2.1
 wcwidth==0.2.6
 WTForms==3.1.2
+olefile==0.47
+
