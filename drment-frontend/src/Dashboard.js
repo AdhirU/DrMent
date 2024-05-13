@@ -37,7 +37,7 @@ class Dashboard extends Component {
 
   render() {
     const documents = this.state.documents.map((item) => (
-      <Document key={item.id} doc_id={item.id} name={item.name} description={item.description} token={this.state.token} />
+      <Document key={item.id} doc_id={item.id} name={item.name} description={item.description} token={this.state.token} user_id={this.state.user_id} />
     ))
 
     // return (
