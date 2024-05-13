@@ -44,7 +44,7 @@ class UploadDocument extends Component {
   handleSubmit(evt) {
     evt.preventDefault();
     this.setState({buttonDisabled: true, buttonText: "Uploading..."})
-    // this.setState({msg: "", macros: { "num_macros": "0", "macros_1_content": "", "macro_1_files": [], "macro_1_flags": [], "macro_1_urls": [] }})
+    this.setState({msg: "", macros: { "num_macros": "0", "macros_1_content": "", "macro_1_files": [], "macro_1_flags": [], "macro_1_urls": [] }})
     let body = {
       "name": this.state.name,
       "description": this.state.description,
