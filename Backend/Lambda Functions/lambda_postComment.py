@@ -5,12 +5,11 @@ import boto3
 
 
 dynamodb = boto3.resource("dynamodb")
-table = dynamodb.Table("Comments")
+table = dynamodb.Table("DrMentTable")
 
 
 def lambda_handler(event, context):
     body = json.loads(event['body'])
-    comment = body["comment"]
     res_body = {"code": 1, "output": "Commented Successfully"}
     # Generate UUID for document
     comment_id = str(uuid.uuid4())
@@ -18,8 +17,8 @@ def lambda_handler(event, context):
     table.put_item(
         Item={
             'id': comment_id,
-            'comment' : comment,
-            'parent_id': body['org'],
+            'comment' : body['comment'],
+            'parent_id': body['doc_id'],
             'user_id': body['user_id'],
             'timestamp': int(time.time())
         })

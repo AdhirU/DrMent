@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import './App.css';
+import './Document.css';
 
 
 class Document extends Component {
@@ -13,6 +13,7 @@ class Document extends Component {
     this.closePopup = this.closePopup.bind(this);
     this.submitComment = this.submitComment.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.fetchComments = this.fetchComments.bind(this);
   }
   getUrl(evt) {
     const doc_id = this.props.doc_id
@@ -24,7 +25,7 @@ class Document extends Component {
       },
       redirect: 'follow'
     };
-    fetch("https://sqikvxgwz3.execute-api.us-east-1.amazonaws.com/dev/document/"+doc_id, requestOptions)
+    fetch("https://sqikvxgwz3.execute-api.us-east-1.amazonaws.com/dev/document/" + doc_id, requestOptions)
       // .then(response => JSON.parse(response))
       .then(resp => resp.json())
       .then(resp => window.open(resp.url, '_blank').focus())
@@ -32,12 +33,30 @@ class Document extends Component {
       // .then(result => this.setState({ documents: JSON.parse(result) }))
       .catch(error => console.log('error', error));
   }
+  fetchComments() {
+    const doc_id = this.props.doc_id
+    var requestOptions = {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": this.props.token
+      },
+      redirect: 'follow'
+    };
+    fetch(`https://sqikvxgwz3.execute-api.us-east-1.amazonaws.com/dev/document/${doc_id}/comments`, requestOptions)
+      // .then(response => JSON.parse(response))
+      .then(resp => resp.json())
+      .then(resp => this.setState({ commentList: resp }))
+      // .then(response => response.arrayBuffer())
+      // .then(result => this.setState({ documents: JSON.parse(result) }))
+      .catch(error => console.log('error', error));
+  }
   toggleOpen() {
-
+    this.fetchComments();
     this.setState({ open: !this.state.open })
   }
   closePopup() {
-    this.setState({ open: false })
+    this.setState({ open: false, commentList: [], comment: "" })
   }
   submitComment(evt) {
     evt.preventDefault();
@@ -59,6 +78,9 @@ class Document extends Component {
       .then(result => {
         console.log(result);
         console.log(result.code)
+        if (result.code == 1) {
+          this.fetchComments();
+        }
         this.setState({ comment: "" })
       })
   }
@@ -66,22 +88,31 @@ class Document extends Component {
     this.setState({ [evt.target.name]: evt.target.value })
   }
   render() {
+    const comments = this.state.commentList.map((item) => (
+      <div className="post" key={item.id}>
+        <div className="post-header">
+          <span className="username">{item.user_id}</span>
+          <span className="date">{item.posted_time}</span>
+        </div>
+        <div className="post-content">
+          {item.comment}
+        </div>
+      </div>
+    ))
     return (
       <div className="document-list-item">
         <Popup open={this.state.open} closeOnDocumentClick onClose={this.closePopup}>
           <div className="modal">
-          <p>Comment 1</p>
-          <p>Comment 2</p>
-          <p>Comment 3</p>
-          <form onSubmit={this.submitComment}>
-            <input 
-              id="comment"
-              name="comment"
-              value={this.state.comment}
-              type="text"
-              onChange={this.handleChange}
-              className='text-box'/>
-            <button>Comment</button>
+            {comments}
+            <form class="new-post-form" onSubmit={this.submitComment}>
+              <input
+                id="comment"
+                name="comment"
+                value={this.state.comment}
+                type="text"
+                onChange={this.handleChange}
+                className='text-box' />
+              <button>Comment</button>
             </form>
           </div>
         </Popup>

@@ -5,3 +5,64 @@
 .text-box {
   width: 100%;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+.post {
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.post-header {
+  margin-bottom: 10px;
+}
+
+.username {
+  font-weight: bold;
+  color: #333;
+}
+
+.date {
+  color: #777;
+  margin-left: 10px;
+}
+
+.post-content {
+  color: #333;
+  line-height: 1.6;
+}
+
+.new-post-form {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.new-post-form input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  margin-bottom: 10px;
+}
+
+.new-post-form button {
+  padding: 10px 20px;
+  background-color: #CC5500;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.new-post-form button:hover {
+  background-color: #0056b3;
+}
