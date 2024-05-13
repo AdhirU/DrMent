@@ -14,7 +14,9 @@ class UploadDocument extends Component {
       msg: "",
       msgSuccess: true,
       open: false,
-      macros: { "num_macros": "0", "macros_1_content": "", "macro_1_files": [], "macro_1_flags": [], "macro_1_urls": [] }
+      macros: { "num_macros": "0", "macros_1_content": "", "macro_1_files": [], "macro_1_flags": [], "macro_1_urls": [] },
+      buttonDisabled: false,
+      buttonText: "Upload"
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,6 +43,7 @@ class UploadDocument extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
+    this.setState({buttonDisabled: true, buttonText: "Uploading..."})
     // this.setState({msg: "", macros: { "num_macros": "0", "macros_1_content": "", "macro_1_files": [], "macro_1_flags": [], "macro_1_urls": [] }})
     let body = {
       "name": this.state.name,
@@ -73,6 +76,7 @@ class UploadDocument extends Component {
         this.setState({ msg: error.message, msgSuccess: false });
       })
       .finally(() => {
+        this.setState({buttonDisabled: false, buttonText: "Upload"})
         this.props.reloadDocs();
       })
   }
@@ -129,7 +133,7 @@ class UploadDocument extends Component {
             type="text"
             onChange={this.handleChange}
           />
-          <button>Upload</button>
+          <button disabled={this.state.buttonDisabled}>{this.state.buttonText}</button>
         </form>
         <div>
           <p className={`upload-message ${this.state.msgSuccess ? "success" : "error"}`}>
