@@ -10,6 +10,14 @@ In order to access the document upload and scanning locally, follow the below co
     git clone https://github.com/AdhirU/DrMent
     cd drment-frontend
     npm start
+
+# Tests
+In order to run tests:
+
+    pip3 install pytest
+    cd Tests
+    pytest
+
 # Configurations
 
     pip3 install -r Backend/Requirements.txt 
