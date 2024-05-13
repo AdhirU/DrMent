@@ -20,7 +20,7 @@ In order to access the document upload and scanning locally, follow the below co
 https://drive.google.com/file/d/1Ju2PBTJXGLRQ4GiVu4OH41THksWgQlsB/view?usp=sharing
 
 # Contributions
-Adhir - Hosted application on AWS, integrated different components together, and created dashboard
-Powall - Implement Macro detection and parsing with flags for malicious behaviours
-Sophie - Implemented login and file upload functionality
+Adhir - Hosted application on AWS, integrated different components together, and created dashboard \
+Powall - Implement Macro detection and parsing with flags for malicious behaviours \
+Sophie - Implemented login and file upload functionality \
 Riya - Contributed to frontend components
