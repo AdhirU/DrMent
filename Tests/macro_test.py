@@ -42,7 +42,7 @@ class TryTesting(TestCase):
         self.assertTrue(json_result["message"] == "No Macros Detected!")
 
     def test_ScanSafePythonTest(self):
-        json_result = ScanMacro("../Backend/Server.py")
+        json_result = ScanMacro("../Backend/macro.py")
         self.assertTrue(json_result["code"] == 0)
         self.assertTrue(json_result["message"] == "Not a office document!")
       
