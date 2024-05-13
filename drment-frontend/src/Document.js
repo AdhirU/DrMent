@@ -7,7 +7,7 @@ import './App.css';
 class Document extends Component {
   constructor(props) {
     super(props);
-    this.state = { open: false, comment: "" }
+    this.state = { open: false, comment: "", commentList: [] }
     this.getUrl = this.getUrl.bind(this);
     this.toggleOpen = this.toggleOpen.bind(this);
     this.closePopup = this.closePopup.bind(this);
@@ -33,6 +33,7 @@ class Document extends Component {
       .catch(error => console.log('error', error));
   }
   toggleOpen() {
+
     this.setState({ open: !this.state.open })
   }
   closePopup() {
@@ -42,7 +43,7 @@ class Document extends Component {
     evt.preventDefault();
     const doc_id = this.props.doc_id;
     let body = {
-      "description": this.state.description,
+      "comment": this.state.comment,
       "user_id": this.props.user_id,
       "doc_id": this.props.doc_id
     }
